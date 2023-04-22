@@ -16,3 +16,18 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/index', function () {
+    $posts=[
+        'Title A',
+        'Title B',
+        'Title C',
+    ];
+    
+    return view('index')
+        ->with(['posts' => $posts]);
+});
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

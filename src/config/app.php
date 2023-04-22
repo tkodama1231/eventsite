@@ -12,7 +12,7 @@ return [
     | any other location as required by the application or its packages.
     |
     */
-
+    // envというヘルパ関数を使用している。.envの中のAPP_NAMEを呼び出している。指定がなければデフォルトでLaravelを返す
     'name' => env('APP_NAME', 'Laravel'),
 
     /*
