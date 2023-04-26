@@ -1,0 +1,21 @@
+@section('content')
+<form method="POST" action="{{ route('contact.send') }}">
+    @csrf
+
+    <label>メールアドレス</label>
+    {{ $input['email'] }}
+    <input name="email" value="{{ $inputs['email'] }}" type="hidden">
+
+    <label>タイトル</label>
+    {{ $input['title'] }}
+    <input name="title" value="{{ $input['title'] }}" type="hidden">
+
+
+    <label>お問い合わせ内容</label>
+    {!! nl2br(e($input['body'])) !!}
+    <input name="body" value="{{ $input['body'] }}" type="hidden">
+
+    <button type="submit" name="action" value="back">入力内容修正</button>
+    <button type="submit" name="action" value="submit">送信する</button>
+</form>
+@endsection
