@@ -43,6 +43,9 @@
 
             <div class="tmp">
                 <h1>トップページ</h1>
+                <a href="{{ route('contact.index') }}">問い合わせ</a>
+            </div>
+
             </div>
 
             {{-- <div class="max-w-6xl mx-auto sm:px-6 lg:px-8">
@@ -137,5 +140,6 @@
                 </div>
             </div> --}}
         </div>
+
     </body>
 </html>

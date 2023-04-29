@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Practice_PostController;
+use App\Http\Controllers\ContactsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,23 +27,16 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 //問い合わせ機能のルーティング
 //入力フォームページ
-Route::get('/contact', 'ContactsController@index')->name('contact.index');
+Route::get('/contact', [ContactsController::class, 'index'])->name('contact.index');
 //確認フォームページ
-Route::post('/contact/confirm', 'ContactsController@confirm')->name('contact.confirm');
+Route::post('/contact/confirm', [ContactsController::class, 'confirm'])->name('contact.confirm');
 //送信完了ページ
-Route::post('/contact/thanks', 'ContactsController@send')->name('contact.send');
+Route::post('/contact/thanks', [ContactsController::class, 'send'])->name('contact.send');
 
 
 
 //dotinstall練習用
-Route::get('/practice_index', function () {
-    $posts = [
-        'Title A',
-        'Title B',
-        'Title C',
-    ];
-
-    return view('practice_index')
-        ->with(['posts' => $posts]);
-});
+// Route::get('/practice_index', ['App\Http\Controllers\Practice_PostController', 'index']);
+// Route::get('/practice_index', ['App\Http\Controllers\Practice_PostController::class', 'index']);
+Route::get('/practice_index', [Practice_PostController::class, 'index']);
 
