@@ -43,8 +43,11 @@
 
             <div class="tmp">
                 <h1>トップページ</h1>
-                <a href="{{ route('contact.index') }}">問い合わせ</a>
+                <a href="{{ route('contact.index') }}">問い合わせ</a><br>
+                <a href="{{ route('search.index') }}">検索</a>
             </div>
+
+
 
             </div>
 

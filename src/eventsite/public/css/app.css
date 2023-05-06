@@ -1,10 +1,11 @@
 @import url(https://fonts.googleapis.com/css?family=Nunito);
-@charset "UTF-8"; /*!
+@charset "UTF-8";
+/*!
  * Bootstrap  v5.2.3 (https://getbootstrap.com/)
  * Copyright 2011-2022 The Bootstrap Authors
  * Copyright 2011-2022 Twitter, Inc.
- * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
- */
+ * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)*/
+ 
 :root {
   --bs-blue: #0d6efd;
   --bs-indigo: #6610f2;
@@ -84,6 +85,12 @@
   :root {
     scroll-behavior: smooth;
   }
+}
+
+.search_card {
+    clear: none;
+    margin: 10px;
+    border: 1px solid black;
 }
 
 body {
@@ -589,7 +596,7 @@ progress {
   color: #6c757d;
 }
 .blockquote-footer::before {
-  content: "— ";
+  content: "— ";
 }
 
 .img-fluid {
@@ -10768,3 +10775,6 @@ textarea.form-control-lg {
     display: none !important;
   }
 }
+
+
+
