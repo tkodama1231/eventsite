@@ -15,9 +15,14 @@
                     @endif
 
                     {{ __('You are logged in!') }}
+
                 </div>
+
             </div>
+            <a href="{{ route('publish.index') }}">イベントを投稿する</a>
         </div>
+
     </div>
+
 </div>
 @endsection

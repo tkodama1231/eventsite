@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Practice_PostController;
 use App\Http\Controllers\ContactsController;
 use App\Http\Controllers\EventController;
+use App\Http\Controllers\PublishController;
 
 /*
 |--------------------------------------------------------------------------
@@ -40,6 +41,9 @@ Route::post('/contact/thanks', [ContactsController::class, 'send'])->name('conta
 Route::get('/search', [EventController::class, 'index'])->name('search.index');
 //検索実行時
 Route::get('/search/results', [EventController::class, 'search'])->name('search.results');
+
+//イベント投稿のルーティング
+Route::get('/publish', [PublishController::class, 'index'])->name('publish.index');
 
 
 

@@ -88,7 +88,7 @@ class EventController extends Controller
 
 
         // ビューにusersとsearchを変数として渡す
-        return view('search.results')
+        return view('search.index')
             ->with([
                 'events' => $events,
                 'categories' => $categories,
