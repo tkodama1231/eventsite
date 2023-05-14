@@ -43,7 +43,10 @@ Route::get('/search', [EventController::class, 'index'])->name('search.index');
 Route::get('/search/results', [EventController::class, 'search'])->name('search.results');
 
 //イベント投稿のルーティング
+//入力ページ
 Route::get('/publish', [PublishController::class, 'index'])->name('publish.index');
+//投稿の確認
+Route::post('/publish/confirm', [PublishController::class, 'confirm'])->name('publish.confirm');
 
 
 

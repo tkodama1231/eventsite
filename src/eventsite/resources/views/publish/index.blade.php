@@ -1,10 +1,10 @@
 @extends('layouts.app')
 
 @section('content')
-<form method="POST" action="">
+<form method="POST" action="{{ route('publish.confirm') }}" enctype="multipart/form-data">
     @csrf
 
-    <div class="row mb-3">
+    {{-- <div class="row mb-3">
         <label>イベント名称</label>
 
         <div class="col-md-6">
@@ -16,17 +16,17 @@
                 <p class="error-message">{{ $errors->first('title') }}</p>
             @endif
         </div>
-    </div>
+    </div> --}}
 
     <div class="row mb-3">
         <label>カバー画像</label>
-
         <div class="col-md-6">
-
+            <input type="file" name="image">
+            <button>アップロード</button>
         </div>
     </div>
 
-    <div class="row mb-3">
+    {{-- <div class="row mb-3">
         <label>イベントの説明</label>
 
         <div class="col-md-6">
@@ -129,12 +129,12 @@
                 @endif
             </div>
         </div>
-    </div>
+    </div> --}}
 
-    <div class="col-md-8">
+    {{-- <div class="col-md-8">
         <button type="submit" name="" value="back">保存する</button>
         <button type="submit" name="" value="submit">公開する</button>
-    </div>
+    </div> --}}
 
 </form>
 @endsection
