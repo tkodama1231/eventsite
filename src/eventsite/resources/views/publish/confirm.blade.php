@@ -1,14 +1,23 @@
 @extends('layouts.app')
 
 @section('content')
+
 <form method="POST" action="">
     @csrf
+
+
 
     <div class="row mb-3">
         <label>カバー画像</label>
 
         <div class="col-md-6">
             <img src="{{ asset($event->image) }}">
+            @foreach ($tickets as $ticket)
+                {{ $ticket['ticket_name'] }}
+                {{ $ticket['ticket_fee'] }}
+                {{ $ticket['ticket_amount'] }}
+                {{ $ticket['ticket_remain'] }}
+            @endforeach
         </div>
     </div>
 

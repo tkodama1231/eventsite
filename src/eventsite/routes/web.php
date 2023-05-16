@@ -48,6 +48,10 @@ Route::get('/publish', [PublishController::class, 'index'])->name('publish.index
 //投稿の確認
 Route::post('/publish/confirm', [PublishController::class, 'confirm'])->name('publish.confirm');
 
+Route::get('multiple_inputs', function(){
+    return view('multiple_inputs');
+});
+
 
 
 //dotinstall練習用
