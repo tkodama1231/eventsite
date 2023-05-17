@@ -5,19 +5,30 @@
 <form method="POST" action="">
     @csrf
 
+    <div class="row mb-3">
+        <label>イベント名称</label>
+
+        <div class="col-md-6">
+            {{ $inputs['title'] }}
+            <input name="title" value="{{ $inputs['title'] }}" type="hidden">
+        </div>
+    </div>
 
 
     <div class="row mb-3">
         <label>カバー画像</label>
 
         <div class="col-md-6">
-            <img src="{{ asset($event->image) }}">
-            @foreach ($tickets as $ticket)
-                {{ $ticket['ticket_name'] }}
-                {{ $ticket['ticket_fee'] }}
-                {{ $ticket['ticket_amount'] }}
-                {{ $ticket['ticket_remain'] }}
-            @endforeach
+            <img src="data:image/jpeg;base64,{{ base64_encode($fileData) }}" alt="Image">
+        </div>
+    </div>
+
+    <div class="row mb-3">
+        <label>イベントの説明</label>
+
+        <div class="col-md-6">
+            {!! nl2br(e($inputs['body'])) !!}
+            <input name="body" value="{{ $inputs['body'] }}" type="hidden">
         </div>
     </div>
 

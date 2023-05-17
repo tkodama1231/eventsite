@@ -23,24 +23,51 @@ class PublishController extends Controller
 
     public function confirm(Request $request)
     {
+        //バリデーションルールを定義
+        //引っかかるとエラーを起こしてくれる
+        // $request->validate([
+        //     'email' => 'required|email',
+        //     'title' => 'required',
+        //     'body' => 'required',
+        // ]);
+
+        //フォームからの入力値をすべて取得
+        $inputs = $request->all();
+        $fileData = file_get_contents(
+            $request->file('image')->getPathname()
+        );
+
+        //  dd($fileData);
+
+        //確認ページに表示
+        //入力値を引数に渡す
+        return view('publish.confirm', [
+            'inputs' => $inputs,
+            'fileData' => $fileData
+        ]);
+
+    }
+
+    public function post(Request $request)
+    {
         //  dd($request);
         $dir = 'image';
-        // $request->file('image')->store('public/'.$dir);
-        // $file_name = $request->file('image')->hashName();
-        $file_name = 'https://via.placeholder.com/640x480.png/009977?text=repudiandae';
+        $request->file('image')->store('public/'.$dir);
+        $file_name = $request->file('image')->hashName();
+        // $file_name = 'https://via.placeholder.com/640x480.png/009977?text=repudiandae';
 
         $event = new Event();
         $event->name = 'test_name';
-        $event->title = 'test_title';
-        // $event->image = 'storage/'.$dir.'/'.$file_name;
-        $event->image = $file_name;
-        $event->body = 'test_body';
-        $event->start_date = date('Y-m-d H:i:s');
-        $event->finish_date = date('Y-m-d H:i:s', strtotime('+1 day'));
-        $event->situation = 'offline';
-        $event->venue = 'test_venue';
-        $event->category = 'A';
-        $event->address = '東京都';
+        $event->title = $request->title;
+        $event->image = 'storage/'.$dir.'/'.$file_name;
+        // $event->image = $file_name;
+        $event->body = $request->body;
+        $event->start_date = $request->start_date;
+        $event->finish_date = $request->finish_date;
+        $event->situation = $request->situation;
+        $event->venue = $request->venue;
+        $event->category = $request->category;
+        $event->address = $request->address;
         $event->save();
 
         $event=Event::latest()->first();
