@@ -47,10 +47,10 @@ Route::get('/search/results', [EventController::class, 'search'])->name('search.
 Route::get('/publish', [PublishController::class, 'index'])->name('publish.index');
 //投稿の確認
 Route::post('/publish/confirm', [PublishController::class, 'confirm'])->name('publish.confirm');
+//送信完了ページ
+Route::post('/publish/thanks', [PublishController::class, 'post'])->name('publish.post');
 
-Route::get('multiple_inputs', function(){
-    return view('multiple_inputs');
-});
+
 
 
 

@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
+
 <form method="POST" action="{{ route('publish.confirm') }}" enctype="multipart/form-data" @submit.prevent="onSubmit">
     @csrf
 
@@ -45,12 +46,12 @@
                 <label>開始日時　終了日時</label>
             </div>
             <div>
-                <input type="date" name="start_date" value="@if (isset($search)) {{ $search }} @endif">
+                <input type="date" name="start_date" value="{{ old('start_date') }}">
                 @if ($errors->has('start_date'))
                     <p class="error-message">{{ $errors->first('start_date') }}</p>
                 @endif
 
-                <input type="date" name="finish_date" value="@if (isset($search)) {{ $search }} @endif">
+                <input type="date" name="finish_date" value="{{ old('finish_date') }}">
                 @if ($errors->has('finish_date'))
                     <p class="error-message">{{ $errors->first('finish_date') }}</p>
                 @endif
@@ -61,15 +62,15 @@
     <div class="row mb-3">
         <label>開催方法</label>
         <div class="col-md-6">
-            <input type="radio" name="situation" value="offline"> オフライン
-            <input type="radio" name="situation" value="online" checked> オンライン
+            <input type="radio" name="situation" value="オフライン" @if("オフライン" === old('situation')) checked @endif> オフライン
+            <input type="radio" name="situation" value="オンライン" @if("オンライン" === old('situation')) checked @endif> オンライン
         </div>
         <label>開催場所</label>
         <div class="col-md-6">
             <select type="search" name="address">
                 <option value="" hidden>▼選択してください</option>
                 @foreach ($prefectures as $prefecture)
-                    <option value="{{ $prefecture->prefecture_name }}">{{ $prefecture->prefecture_name }}</option>
+                    <option value="{{ $prefecture->prefecture_name }}" @if("$prefecture->prefecture_name" === old('address')) selected @endif>{{ $prefecture->prefecture_name }}</option>
                 @endforeach
             </select>
         </div>
@@ -91,7 +92,7 @@
             <select type="search" name="category">
                 <option value="" hidden>▼選択してください</option>
                 @foreach ($categories as $category)
-                    <option value="{{ $category->category_name }}">{{ $category->category_name }}</option>
+                    <option value="{{ $category->category_name }}" @if("$category->category_name" === old('category')) selected @endif>{{ $category->category_name }}</option>
                 @endforeach
             </select>
         </div>
@@ -124,68 +125,90 @@
             <button type="submit">公開する</button>
         </div>
 
+        <hr>
+        <label>textsの中身</label>
+        <div v-text="tickets_name"></div>
+
 
     </div>
 
-    <script>
 
-        new Vue({
-            el: '#ticket_box',
-            data: {
-                tickets_name: [""], // 複数入力のデータ（配列）
-                tickets_fee: [""], // 複数入力のデータ（配列）
-                tickets_amount: [""], // 複数入力のデータ（配列）
-            },
-            methods: {
-
-                // ボタンをクリックしたときのイベント ①〜③
-                // ボタンをクリックしたときのイベント ③
-                removeInput(index) {
-                    this.tickets_name.splice(index, 1);
-                    this.tickets_fee.splice(index, 1);
-                    this.tickets_amount.splice(index, 1);
-                },
-
-                // ボタンをクリックしたときのイベント ③
-                addInput() {
-
-                    this.tickets_name.push(''); // 配列に１つ空データを追加する
-                    this.tickets_fee.push(''); // 配列に１つ空データを追加する
-                    this.tickets_amount.push(''); // 配列に１つ空データを追加する
-
-                },
-
-                onSubmit() {
-
-                const url = '/publish/index';
-                const params = {
-                    tickets: this.tickets
-                };
-                axios.post(url, params)
-                    .then(response => {
-
-                        // 成功した時
-
-
-                    })
-                    .catch(error => {
-
-                        // 失敗した時
-
-
-                    });
-
-                }
-
-    // 省略
-            }
-        });
-
-    </script>
 
 
 
 </form>
+
+@php
+
+$session_data = session('_old_input');
+
+$tickets_name = $session_data['tickets_name'] ?? [''];
+$tickets_fee = $session_data['tickets_fee'] ?? [''];
+$tickets_amount = $session_data['tickets_amount'] ?? [''];
+
+$tickets_name = json_encode($tickets_name);
+$tickets_fee = json_encode($tickets_fee);
+$tickets_amount = json_encode($tickets_amount);
+
+@endphp
+
+<script>
+
+   new Vue({
+       el: '#ticket_box',
+       data: {
+            tickets_name: {!! $tickets_name !!},
+            tickets_fee: {!! $tickets_fee !!},
+            tickets_amount: {!! $tickets_amount !!},
+       },
+       methods: {
+
+           // ボタンをクリックしたときのイベント ①〜③
+           // ボタンをクリックしたときのイベント ③
+           removeInput(index) {
+               this.tickets_name.splice(index, 1);
+               this.tickets_fee.splice(index, 1);
+               this.tickets_amount.splice(index, 1);
+           },
+
+           // ボタンをクリックしたときのイベント ③
+           addInput() {
+
+               this.tickets_name.push(''); // 配列に１つ空データを追加する
+               this.tickets_fee.push(''); // 配列に１つ空データを追加する
+               this.tickets_amount.push(''); // 配列に１つ空データを追加する
+
+           },
+
+           onSubmit() {
+
+           const url = '/publish/index';
+           const params = {
+                tickets_name: this.tickets_name,
+                tickets_fee: this.tickets_fee,
+                tickets_amount: this.tickets_amount
+           };
+           axios.post(url, params)
+               .then(response => {
+
+                   // 成功した時
+
+
+               })
+               .catch(error => {
+
+                   // 失敗した時
+
+
+               });
+
+           }
+
+// 省略
+       }
+   });
+
+</script>
 
 
 

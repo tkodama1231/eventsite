@@ -15,6 +15,6 @@ class EventsTableSeeder extends Seeder
     public function run()
     {
         Event::query()->delete();
-        Event::factory()->count(100)->create();
+        // Event::factory()->count(100)->create();
     }
 }
