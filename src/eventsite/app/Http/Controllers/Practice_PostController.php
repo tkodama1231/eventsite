@@ -11,7 +11,7 @@ class Practice_PostController extends Controller
     public function index()
     {
         $posts = Prpost::latest()->get();
-
+        
         return view('practice_index')
             ->with(['posts' => $posts]);
     }

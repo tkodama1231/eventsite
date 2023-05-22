@@ -19,8 +19,15 @@
         <label>カバー画像</label>
 
         <div class="col-md-6">
-            <img src="data:image/jpeg;base64,{{ base64_encode($fileData) }}" alt="Image">
-            <input type="hidden" name="file_path" value="{{ $file_path }}">
+            @if(isset($fileData))
+                <img src="data:image/jpeg;base64,{{ base64_encode($fileData) }}" alt="Image">
+                <input type="hidden" name="file_path" value="{{ $file_path }}">
+
+            @else
+                <p>なし</p>
+
+            @endif
+
         </div>
     </div>
 

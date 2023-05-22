@@ -6,6 +6,7 @@ use App\Models\Event;
 use App\Models\Category;
 use App\Models\Prefecture;
 use App\Models\Ticket;
+use App\Http\Requests\PublishRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -22,7 +23,7 @@ class PublishController extends Controller
                 'categories' => $categories]);
     }
 
-    public function confirm(Request $request)
+    public function confirm(PublishRequest $request)
     {
         //バリデーションルールを定義
         //引っかかるとエラーを起こしてくれる
@@ -34,15 +35,26 @@ class PublishController extends Controller
 
         // dd($request);
 
-        //フォームからの入力値をすべて取得
-        $dir = 'image';
         $inputs = $request->all();
-        $fileData = file_get_contents(
-            $request->file('image')->getPathname()
-        );
-        $request->file('image')->store('public/'.$dir);
-        $file_name = $request->file('image')->hashName();
-        $file_path = 'storage/'.$dir.'/'.$file_name;
+
+
+        //フォームからの入力値をすべて取得
+        if(isset($request->image)){
+            $dir = 'image';
+
+            $fileData = file_get_contents(
+                $request->file('image')->getPathname()
+            );
+            $request->file('image')->store('public/'.$dir);
+            $file_name = $request->file('image')->hashName();
+            $file_path = $dir.'/'.$file_name;
+
+        }else{
+            $fileData = null;
+            $file_path = null;
+
+        }
+
 
         // dd($inputs);
 
@@ -78,7 +90,7 @@ class PublishController extends Controller
         if($action !== 'submit'){
 
             //storageの画像削除
-            dd($file_path)
+            //  dd($file_path);
             \Storage::disk('public')->delete($file_path);
 
             //戻るボタンの場合リダイレクト処理
@@ -93,15 +105,15 @@ class PublishController extends Controller
 
 
             //DB保存処理
-            //   dd($request);
+            //    dd($request);
             // $dir = 'image';
             // $request->file('image')->store('public/'.$dir);
             // $file_name = $request->file_name;
 
             $event = new Event();
-            $event->name = Auth::id();
+            $event->user_id = Auth::id();
             $event->title = $request->title;
-            $event->image = $file_path;
+            $event->image ='storage/'.$file_path;
             $event->body = $request->body;
             $event->start_date = $request->start_date;
             $event->finish_date = $request->finish_date;

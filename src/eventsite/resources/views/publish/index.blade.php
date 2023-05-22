@@ -64,15 +64,21 @@
         <div class="col-md-6">
             <input type="radio" name="situation" value="オフライン" @if("オフライン" === old('situation')) checked @endif> オフライン
             <input type="radio" name="situation" value="オンライン" @if("オンライン" === old('situation')) checked @endif> オンライン
+            @if ($errors->has('situation'))
+                <p class="error-message">{{ $errors->first('situation') }}</p>
+            @endif
         </div>
         <label>開催場所</label>
         <div class="col-md-6">
-            <select type="search" name="address">
+            <select name="address">
                 <option value="" hidden>▼選択してください</option>
                 @foreach ($prefectures as $prefecture)
                     <option value="{{ $prefecture->prefecture_name }}" @if("$prefecture->prefecture_name" === old('address')) selected @endif>{{ $prefecture->prefecture_name }}</option>
                 @endforeach
             </select>
+            @if ($errors->has('address'))
+                <p class="error-message">{{ $errors->first('address') }}</p>
+            @endif
         </div>
         <label>会場名</label>
         <div class="col-md-6">
@@ -95,6 +101,9 @@
                     <option value="{{ $category->category_name }}" @if("$category->category_name" === old('category')) selected @endif>{{ $category->category_name }}</option>
                 @endforeach
             </select>
+            @if ($errors->has('category'))
+                <p class="error-message">{{ $errors->first('category') }}</p>
+            @endif
         </div>
     </div>
 
@@ -114,10 +123,25 @@
 
                 <!-- 入力ボックスの削除ボタン -->
                 <button type="button" @click="removeInput(index)">削除</button>
+
             </div>
+            @if ($errors->has('tickets_name'))
+                    <p class="error-message">{{ $errors->first('tickets_name') }}</p>
+                @endif
+                @if ($errors->has('tickets_name.*'))
+                    <p class="error-message">{{ $errors->first('tickets_name.*') }}</p>
+                @endif
+                @if ($errors->has('tickets_fee.*'))
+                    <p class="error-message">{{ $errors->first('tickets_fee.*') }}</p>
+                @endif
+                @if ($errors->has('tickets_amount.*'))
+                    <p class="error-message">{{ $errors->first('tickets_amount.*') }}</p>
+                @endif
 
             <!-- 入力ボックスを追加するボタン ② -->
             <button type="button" @click="addInput">追加する</button>
+
+
 
         </div>
 
