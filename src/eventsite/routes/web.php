@@ -1,10 +1,13 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Practice_PostController;
 use App\Http\Controllers\ContactsController;
-use App\Http\Controllers\EventController;
+use App\Http\Controllers\SearchController;
 use App\Http\Controllers\PublishController;
+use App\Http\Controllers\DetailController;
+use App\Http\Controllers\ApplyController;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,6 +30,7 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
+
 //問い合わせ機能のルーティング
 //入力フォームページ
 Route::get('/contact', [ContactsController::class, 'index'])->name('contact.index');
@@ -38,9 +42,9 @@ Route::post('/contact/thanks', [ContactsController::class, 'send'])->name('conta
 //検索機能のルーティング
 //welcomeからの遷移
 //検索機能のルーティング
-Route::get('/search', [EventController::class, 'index'])->name('search.index');
+Route::get('/search', [SearchController::class, 'index'])->name('search.index');
 //検索実行時
-Route::get('/search/results', [EventController::class, 'search'])->name('search.results');
+Route::get('/search/results', [SearchController::class, 'search'])->name('search.results');
 
 //イベント投稿のルーティング
 //入力ページ
@@ -50,7 +54,21 @@ Route::post('/publish/confirm', [PublishController::class, 'confirm'])->name('pu
 //送信完了ページ
 Route::post('/publish/thanks', [PublishController::class, 'post'])->name('publish.post');
 
+//イベント詳細確認のルーティング
+//詳細ページ表示
+Route::get('/detail/index/{event}', [DetailController::class, 'index'])
+    ->name('detail.index')
+    ->where('event', '[0-9]+');
 
+//イベント申し込みのルーティング
+//申し込みページ表示
+Route::get('/apply/index/{event}', [ApplyController::class, 'index'])
+    ->name('apply.index')
+    ->where('event', '[0-9]+');
+Route::post('/apply/confirm', [ApplyController::class, 'confirm'])
+    ->name('apply.confirm');
+Route::post('/apply/thanks', [ApplyController::class, 'thanks'])
+    ->name('apply.thanks');
 
 
 

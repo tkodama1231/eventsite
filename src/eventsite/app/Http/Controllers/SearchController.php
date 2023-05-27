@@ -7,7 +7,7 @@ use App\Models\Category;
 use App\Models\Prefecture;
 use Illuminate\Http\Request;
 
-class EventController extends Controller
+class SearchController extends Controller
 {
 
     public function index()

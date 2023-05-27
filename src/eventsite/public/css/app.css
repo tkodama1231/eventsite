@@ -5,7 +5,7 @@
  * Copyright 2011-2022 The Bootstrap Authors
  * Copyright 2011-2022 Twitter, Inc.
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)*/
- 
+
 :root {
   --bs-blue: #0d6efd;
   --bs-indigo: #6610f2;
@@ -87,10 +87,31 @@
   }
 }
 
+img {
+    max-width:100%;
+    vertical-align:bottom;
+}
+
+.content-img{
+    width:200px;
+}
+
 .search_card {
+    position: relative;
     clear: none;
     margin: 10px;
     border: 1px solid black;
+    /* background-color: #0d6efd; */
+}
+
+.search_card .Link{
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+
 }
 
 body {

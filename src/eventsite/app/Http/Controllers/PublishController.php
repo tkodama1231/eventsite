@@ -113,7 +113,12 @@ class PublishController extends Controller
             $event = new Event();
             $event->user_id = Auth::id();
             $event->title = $request->title;
-            $event->image ='storage/'.$file_path;
+            if(isset($file_path)){
+                $event->image ='storage/'.$file_path;
+            }else{
+                $event->image =null;
+            }
+            // $event->image ='storage/'.$file_path;
             $event->body = $request->body;
             $event->start_date = $request->start_date;
             $event->finish_date = $request->finish_date;

@@ -39,11 +39,12 @@
         </div>
     </form>
 
-    <div class="row mb-3">
+    <div >
 
         @forelse ($events as $event)
-        <div >
-            <ul class="search_card">
+        <div class="search_card">
+            <a class="Link" href="{{ route('detail.index', $event ) }}"></a>
+            <ul>
                 <li>
                     イベント名：{{ $event->title }}
                 </li>
