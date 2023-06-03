@@ -354,9 +354,16 @@ tfoot,
 tr,
 td,
 th {
+  border-width: 0;
   border-color: inherit;
   border-style: solid;
-  border-width: 0;
+}
+
+.participants_table {
+  border-width: 1px;
+  border-color: inherit;
+  border-style: solid;
+
 }
 
 label {

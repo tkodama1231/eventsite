@@ -144,11 +144,23 @@
         @endif
     </div>
 
+    {{-- ボタンがcertificationによって変化する実装をいれる --}}
+
     <div>
         <button>
-            <a href="{{ route('apply.index', $event) }}">
-                申し込み
-            </a>
+            @if($certification === 'host')
+                <a href="{{ route('detail.host', $event) }}">
+                    イベントの詳細を確認
+                </a>
+            @elseif($certification === 'participant')
+                <a href="{{ route('detail.cancel', $event) }}">
+                    参加をキャンセルする
+                </a>
+            @else
+                <a href="{{ route('apply.index', $event) }}">
+                    申し込み
+                </a>
+            @endif
         </button>
     </div>
 

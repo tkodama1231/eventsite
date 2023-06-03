@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Event;
 use App\Models\Ticket;
+use App\Models\Participant;
 use App\Http\Requests\ApplyRequest;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
@@ -55,6 +56,32 @@ class ApplyController extends Controller
                 'inputs' => $inputs,
                 'event' => $event,
                 'ticket' => $ticket
+            ]);
+
+
+    }
+
+    public function thanks(Request $request)
+    {
+        // dd($request);
+        //participantsテーブル更新
+        $participant = new Participant();
+        $participant->event_id = $request->event_id;
+        $participant->user_id = Auth::id();
+        $participant->ticket_id = $request->ticket_id;
+        $participant->payment = $request->payment;
+        $participant->save();
+
+        //ticketテーブル更新
+        $ticketBuilder = DB::table('tickets');
+        $ticketBuilder->where('id', $request->ticket_id)->decrement('ticket_remain');
+
+        //申し込みイベントのIDを取得
+        $event_id = $request->event_id;
+
+        return view('apply.thanks')
+            ->with([
+                'event_id' => $event_id
             ]);
 
 

@@ -13,5 +13,5 @@ class Participant extends Model
         'event_id',
         'name',
         'ticket_id'
-    ]
+    ];
 }

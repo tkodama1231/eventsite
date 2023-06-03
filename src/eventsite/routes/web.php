@@ -8,6 +8,8 @@ use App\Http\Controllers\SearchController;
 use App\Http\Controllers\PublishController;
 use App\Http\Controllers\DetailController;
 use App\Http\Controllers\ApplyController;
+use App\Http\Controllers\MemberController;
+use App\Http\Controllers\AccountController;
 
 /*
 |--------------------------------------------------------------------------
@@ -59,16 +61,50 @@ Route::post('/publish/thanks', [PublishController::class, 'post'])->name('publis
 Route::get('/detail/index/{event}', [DetailController::class, 'index'])
     ->name('detail.index')
     ->where('event', '[0-9]+');
+//主催者向け詳細ページ
+Route::get('/detail/host/{event}', [DetailController::class, 'host'])
+    ->name('detail.host')
+    ->where('event', '[0-9]+');
+//主催者向けイベント削除
+Route::get('/detail/destroy/{event}', [DetailController::class, 'destroy'])
+    ->name('detail.destroy')
+    ->where('event', '[0-9]+');
+//参加者向けイベントキャンセル
+Route::get('/detail/cancel/{event}', [DetailController::class, 'cancel'])
+    ->name('detail.cancel')
+    ->where('event', '[0-9]+');
 
 //イベント申し込みのルーティング
 //申し込みページ表示
 Route::get('/apply/index/{event}', [ApplyController::class, 'index'])
     ->name('apply.index')
     ->where('event', '[0-9]+');
+//申込内容の確認
 Route::post('/apply/confirm', [ApplyController::class, 'confirm'])
     ->name('apply.confirm');
+//申し込み完了
 Route::post('/apply/thanks', [ApplyController::class, 'thanks'])
     ->name('apply.thanks');
+
+//会員画面のルーティング
+//主催イベント一覧表示
+Route::get('/member/host', [MemberController::class, 'host'])
+    ->name('member.host');
+//参加イベント一覧表示
+Route::get('/member/participant', [MemberController::class, 'participant'])
+    ->name('member.participant');
+
+
+//アカウント設定機能として新しくグループをつくる
+//アカウント設定ページ
+Route::get('/account', [AccountController::class, 'index'])
+    ->name('account.index');
+//変更確認ページ
+Route::post('/account/confirm', [AccountController::class, 'confirm'])
+    ->name('account.confirm');
+//変更確認ページ
+Route::post('/account/thanks', [AccountController::class, 'thanks'])
+    ->name('account.thanks');
 
 
 
