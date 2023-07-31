@@ -2,7 +2,6 @@
 
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
-use App\Http\Controllers\Practice_PostController;
 use App\Http\Controllers\ContactsController;
 use App\Http\Controllers\SearchController;
 use App\Http\Controllers\PublishController;
@@ -106,33 +105,6 @@ Route::post('/account/confirm', [AccountController::class, 'confirm'])
 Route::post('/account/thanks', [AccountController::class, 'thanks'])
     ->name('account.thanks');
 
-
-
-//dotinstall練習用
-Route::get('/practice_index', [Practice_PostController::class, 'index'])
-    ->name('posts.index');
-
-Route::get('/practice_posts/{post}', [Practice_PostController::class, 'show'])
-    ->name('posts.show')
-    ->where('post', '[0-9]+');
-
-Route::get('/practice_posts/practice_create', [Practice_PostController::class, 'create'])
-    ->name('posts.create');
-
-Route::post('/practice_posts/practice_store', [Practice_PostController::class, 'store'])
-    ->name('posts.store');
-
-Route::get('/practice_posts/{post}/edit', [Practice_PostController::class, 'edit'])
-    ->name('posts.edit')
-    ->where('post', '[0-9]+');
-
-Route::patch('/practice_posts/{post}/update', [Practice_PostController::class, 'update'])
-    ->name('posts.update')
-    ->where('post', '[0-9]+');
-
-Route::delete('/practice_posts/{post}/destroy', [Practice_PostController::class, 'destroy'])
-    ->name('posts.destroy')
-    ->where('post', '[0-9]+');
 
 
 
