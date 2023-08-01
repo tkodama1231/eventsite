@@ -50,13 +50,7 @@ class DetailController extends Controller
         $tickets = $ticketsBuilder
             ->where('event_id',$event['id'])
             ->get();
-        //  dd($certification);
-
-
-        // $participantsBuilder
-        //     ->join('participants', 'participants.ticket_id','=','tickets.id')
-        //     ->where('event_id',$event['id'])
-        //     ->get();
+ 
         $participantsBuilder = DB::table('participants');
         $participantsBuilder
             ->where('participants.event_id',$event['id'])

@@ -118,13 +118,6 @@ class AccountController extends Controller
 
             $user->save();
 
-            // $userBuilder = DB::table('users');
-            // $userBuilder
-            //     ->where('id', $user_id)
-            //     ->update([
-            //         ''
-            //     ])
-
         }
 
 

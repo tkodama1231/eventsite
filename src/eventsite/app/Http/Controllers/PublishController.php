@@ -25,15 +25,6 @@ class PublishController extends Controller
 
     public function confirm(PublishRequest $request)
     {
-        //バリデーションルールを定義
-        //引っかかるとエラーを起こしてくれる
-        // $request->validate([
-        //     'email' => 'required|email',
-        //     'title' => 'required',
-        //     'body' => 'required',
-        // ]);
-
-        // dd($request);
 
         $inputs = $request->all();
 
@@ -71,10 +62,6 @@ class PublishController extends Controller
     public function post(Request $request)
     {
 
-        //バリデーション
-        //あとで考える
-
-        //  dd($request);
 
         //actionの値を取得
         $action = $request->input('action');
@@ -103,12 +90,6 @@ class PublishController extends Controller
             //二重送信対策のためトークンを再発行
             $request->session()->regenerateToken();
 
-
-            //DB保存処理
-            //    dd($request);
-            // $dir = 'image';
-            // $request->file('image')->store('public/'.$dir);
-            // $file_name = $request->file_name;
 
             $event = new Event();
             $event->user_id = Auth::id();

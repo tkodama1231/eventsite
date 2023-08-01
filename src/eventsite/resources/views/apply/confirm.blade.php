@@ -2,9 +2,7 @@
 
 @section('content')
 
-@php
-    // dd($inputs);
-@endphp
+
 
 <form method="POST" action="{{ route('apply.thanks') }}">
     @csrf
@@ -95,9 +93,3 @@
 
 
 @endsection
-
-
-{{-- ビューを作った後で
-participantsテーブルに
-決済のカラムを追加する
-thanksコントローラの作成 --}}

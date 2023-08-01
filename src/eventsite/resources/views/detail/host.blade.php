@@ -76,15 +76,6 @@
         </div>
     </div>
 
-    {{-- <div class="row mb-3">
-        <label>地図</label>
-
-        <div class="col-md-6">
-            JSを使ってgooglemapAPIに接続
-            いったん後回し
-        </div>
-    </div> --}}
-
     <hr>
 
     <div class="row mb-3">

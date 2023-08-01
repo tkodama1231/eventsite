@@ -30,7 +30,7 @@ class SearchController extends Controller
        $categories = Category::get();
        $prefectures = Prefecture::get();
 
-        //イベント一覧をページねーとで取得
+        //イベント一覧をページネートで取得
         $events = Event::paginate(20);
 
 
